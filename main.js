@@ -31,7 +31,14 @@ console.log("Initiating");
 http.createServer(function (request, response) {
     if (request.method == 'POST') {
         console.log("POST");
-        console.log(JSON.stringify(request.body));
+        var body = '';
+        request.on('data', function (d) {
+            console.log("data");
+            body += d;
+        });
+        request.on('end', function () {
+            console.log("Body: " + JSON.stringify(body));
+        });
     } else if (request.method == 'GET') {
         console.log("GET");
         console.log(`Receiving request`);
