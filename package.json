@@ -1,0 +1,19 @@
+{
+  "name": "nodeserver",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micaelr95/NodeServer.git"
+  },
+  "author": "Micael Rodrigues",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/micaelr95/NodeServer/issues"
+  },
+  "homepage": "https://github.com/micaelr95/NodeServer#readme"
+}
