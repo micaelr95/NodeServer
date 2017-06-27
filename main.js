@@ -1,11 +1,13 @@
-var http = require('http');
-var fileSystem = require('fs');
-var path = require('path');
-var os = require('os');
+const http = require('http');
+const fileSystem = require('fs');
+const path = require('path');
+const os = require('os');
 
 var ifaces = os.networkInterfaces();
 var localIp;
+const file = "file.json";
 
+// Get local machine IP
 Object.keys(ifaces).forEach(function (ifname) {
     var alias = 0;
 
@@ -37,12 +39,48 @@ http.createServer(function (request, response) {
             body += d;
         });
         request.on('end', function () {
-            console.log("Body: " + JSON.stringify(body));
+            //console.log("Body: " + body);
+
+            fileSystem.readFile(file, function (err, data) {
+                var json = JSON.parse(data);
+                let jsonKey = json.teste2;
+                let post = [];
+                for (x in jsonKey) {
+                    let o = {};
+                    o[x] = jsonKey[x];
+                    post.push(JSON.stringify(o));
+                }
+                console.log(post.join());
+                jsonKey = post.join().slice(1, -1);
+                var n = jsonKey.search("},{");
+                jsonKey = jsonKey.slice(0, n) + "," + jsonKey.slice(n + 3, jsonKey.length);
+                console.log(jsonKey);
+
+                //post.push({'' num: 3, app: 'helloagain_again', message: 'yet another message' });
+                //console.log(post);
+                //var jsonArray = JSON.parse(JSON.stringify(post))
+                //jsonKey = jsonArray.slice(0, -1);
+                json.teste2 = jsonKey;
+                console.log(JSON.stringify(JSON.parse(json)));
+
+                //json[teste2] = value;
+
+                //let cena = JSON.parse(json);
+
+                //fileSystem.writeFile("test.json", JSON.parse(JSON.stringify(json)))
+            })
+
+            //var json = JSON.parse(fileSystem.readFileSync(file, 'utf8'));
+            //json.push('search result: ' + body)
+
+            //fs.writeFile("results.json", JSON.stringify(json))
+
+            console.log("End POST");
         });
     } else if (request.method == 'GET') {
         console.log("GET");
         console.log(`Receiving request`);
-        var filePath = path.join(__dirname, 'file.json');
+        var filePath = path.join(__dirname, file);
         var stat = fileSystem.statSync(filePath);
 
         response.writeHead(200, {
