@@ -43,38 +43,25 @@ http.createServer(function (request, response) {
 
             fileSystem.readFile(file, function (err, data) {
                 var json = JSON.parse(data);
-                let jsonKey = json.teste2;
+                /*let jsonKey = json.teste2;
                 let post = [];
                 for (x in jsonKey) {
-                    let o = {};
+                    let o = [];
                     o[x] = jsonKey[x];
-                    post.push(JSON.stringify(o));
+                    post.push(o);
                 }
-                console.log(post.join());
-                jsonKey = post.join().slice(1, -1);
-                var n = jsonKey.search("},{");
-                jsonKey = jsonKey.slice(0, n) + "," + jsonKey.slice(n + 3, jsonKey.length);
-                console.log(jsonKey);
+                console.log(post);*/
+                //jsonKey = post.join().slice(1, -1);
+                //var n = jsonKey.search("},{");
+                //jsonKey = jsonKey.slice(0, n) + "," + jsonKey.slice(n + 3, jsonKey.length);
+                //console.log(jsonKey);
 
-                //post.push({'' num: 3, app: 'helloagain_again', message: 'yet another message' });
                 //console.log(post);
-                //var jsonArray = JSON.parse(JSON.stringify(post))
-                //jsonKey = jsonArray.slice(0, -1);
-                json.teste2 = jsonKey;
-                console.log(JSON.stringify(JSON.parse(json)));
-
-                //json[teste2] = value;
-
-                //let cena = JSON.parse(json);
-
-                //fileSystem.writeFile("test.json", JSON.parse(JSON.stringify(json)))
+                json.teste2["-KmXJyZNnY3OnauefyNu"] = body;
+                console.log(body);
+                //console.log(JSON.stringify(json));
+                fileSystem.writeFile("test.json", JSON.stringify(json));
             })
-
-            //var json = JSON.parse(fileSystem.readFileSync(file, 'utf8'));
-            //json.push('search result: ' + body)
-
-            //fs.writeFile("results.json", JSON.stringify(json))
-
             console.log("End POST");
         });
     } else if (request.method == 'GET') {
