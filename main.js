@@ -47,7 +47,10 @@ http.createServer(function (request, response) {
                 let key = crypto.randomBytes(20).toString('hex');
                 json.teste2[key] = JSON.parse(body);
                 console.log(body);
-                fileSystem.writeFile("test.json", JSON.stringify(json));
+                fileSystem.writeFile("test.json", JSON.stringify(json), (err) => {
+                    if (err) throw err;
+                    console.log('The file has been saved!');
+                });
             })
             console.log("End POST");
         });
