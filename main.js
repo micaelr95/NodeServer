@@ -39,27 +39,12 @@ http.createServer(function (request, response) {
             body += d;
         });
         request.on('end', function () {
-            //console.log("Body: " + body);
+            console.log("Body: " + body);
 
             fileSystem.readFile(file, function (err, data) {
                 var json = JSON.parse(data);
-                /*let jsonKey = json.teste2;
-                let post = [];
-                for (x in jsonKey) {
-                    let o = [];
-                    o[x] = jsonKey[x];
-                    post.push(o);
-                }
-                console.log(post);*/
-                //jsonKey = post.join().slice(1, -1);
-                //var n = jsonKey.search("},{");
-                //jsonKey = jsonKey.slice(0, n) + "," + jsonKey.slice(n + 3, jsonKey.length);
-                //console.log(jsonKey);
-
-                //console.log(post);
-                json.teste2["-KmXJyZNnY3OnauefyNu"] = body;
+                json.teste2["-KmXJyZNnY3OnauefyNu"] = JSON.parse(body);
                 console.log(body);
-                //console.log(JSON.stringify(json));
                 fileSystem.writeFile("test.json", JSON.stringify(json));
             })
             console.log("End POST");
