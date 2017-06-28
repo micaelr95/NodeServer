@@ -2,6 +2,7 @@ const http = require('http');
 const fileSystem = require('fs');
 const path = require('path');
 const os = require('os');
+const crypto = require('crypto');
 
 var ifaces = os.networkInterfaces();
 var localIp;
@@ -43,7 +44,8 @@ http.createServer(function (request, response) {
 
             fileSystem.readFile(file, function (err, data) {
                 var json = JSON.parse(data);
-                json.teste2["-KmXJyZNnY3OnauefyNu"] = JSON.parse(body);
+                let key = crypto.randomBytes(20).toString('hex');
+                json.teste2[key] = JSON.parse(body);
                 console.log(body);
                 fileSystem.writeFile("test.json", JSON.stringify(json));
             })
