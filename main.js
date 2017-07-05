@@ -6,7 +6,7 @@ const crypto = require('crypto');
 
 var ifaces = os.networkInterfaces();
 var localIp;
-const file = "file.json";
+const file = "test.json";
 
 // Get local machine IP
 Object.keys(ifaces).forEach(function (ifname) {
@@ -45,7 +45,7 @@ http.createServer(function (request, response) {
             fileSystem.readFile(file, function (err, data) {
                 var json = JSON.parse(data);
                 let key = crypto.randomBytes(20).toString('hex');
-                json.teste2[key] = JSON.parse(body);
+                json.teste[key] = JSON.parse(body);
                 console.log(body);
                 fileSystem.writeFile("test.json", JSON.stringify(json), (err) => {
                     if (err) throw err;
